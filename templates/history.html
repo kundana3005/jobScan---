@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - JobScan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark px-4 py-3" id="dashboard-nav">
+        <span class="navbar-brand fw-bold fs-5">🔍 JobScan</span>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-white">👤 {{ username }}</span>
+            <a href="/dashboard" class="btn btn-outline-light btn-sm">← Dashboard</a>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-5 mt-4">
+
+        <!-- Page heading -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold mb-1">📋 Scan History</h3>
+                <p class="text-muted mb-0">All your previous job scan results</p>
+            </div>
+
+            <!-- Clear history button -->
+            {% if history %}
+            <a href="/clear_history"
+               class="btn btn-outline-danger"
+               onclick="return confirm('Are you sure you want to clear all history?')">
+                🗑️ Clear History
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- Stats row -->
+        {% if history %}
+        <div class="row g-3 mb-4">
+
+            <!-- Total scans -->
+            <div class="col-md-3">
+                <div class="stat-card p-3 rounded-4 text-center bg-white shadow-sm">
+                    <div class="fs-2 mb-1">📊</div>
+                    <h4 class="fw-bold mb-0">{{ history|length }}</h4>
+                    <p class="text-muted mb-0 small">Total Scans</p>
+                </div>
+            </div>
+
+            <!-- Fake jobs found -->
+            <div class="col-md-3">
+                <div class="stat-card p-3 rounded-4 text-center bg-white shadow-sm">
+                    <div class="fs-2 mb-1">🚨</div>
+                    <h4 class="fw-bold mb-0 text-danger">
+                        {{ history | selectattr('result', 'equalto', 'FAKE') | list | length }}
+                    </h4>
+                    <p class="text-muted mb-0 small">Fake Jobs Found</p>
+                </div>
+            </div>
+
+            <!-- Real jobs found -->
+            <div class="col-md-3">
+                <div class="stat-card p-3 rounded-4 text-center bg-white shadow-sm">
+                    <div class="fs-2 mb-1">✅</div>
+                    <h4 class="fw-bold mb-0 text-success">
+                        {{ history | selectattr('result', 'equalto', 'REAL') | list | length }}
+                    </h4>
+                    <p class="text-muted mb-0 small">Real Jobs Found</p>
+                </div>
+            </div>
+
+            <!-- Average confidence -->
+            <div class="col-md-3">
+                <div class="stat-card p-3 rounded-4 text-center bg-white shadow-sm">
+                    <div class="fs-2 mb-1">🎯</div>
+                    <h4 class="fw-bold mb-0 text-primary">{{ avg_confidence }}%</h4>
+                    <p class="text-muted mb-0 small">Avg Confidence</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- History table -->
+        <div class="bg-white rounded-4 shadow-sm p-4">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Company</th>
+                        <th>Salary</th>
+                        <th>Description Preview</th>
+                        <th>Result</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in history %}
+                    <!-- Only show history for logged in user -->
+                    {% if item.user == current_user %}
+                    <tr>
+                        <!-- Serial number -->
+                        <td class="text-muted">{{ loop.index }}</td>
+
+                        <!-- Company -->
+                        <td class="fw-semibold">{{ item.company if item.company else 'N/A' }}</td>
+
+                        <!-- Salary -->
+                        <td>{{ item.salary if item.salary else 'N/A' }}</td>
+
+                        <!-- Description preview -->
+                        <td class="text-muted small">{{ item.description }}</td>
+
+                        <!-- Result badge -->
+                        <td>
+                            {% if item.result == 'FAKE' %}
+                            <span class="badge bg-danger px-3 py-2">🚨 FAKE</span>
+                            {% else %}
+                            <span class="badge bg-success px-3 py-2">✅ REAL</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Confidence -->
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="progress flex-grow-1" style="height: 8px;">
+                                    </div>
+                                    <div class="progress-bar {{ 'bg-danger' if item.result == 'FAKE' else 'bg-success' }}"
+     data-width="{{ item.confidence }}">
+</div>
+                                <span class="small fw-semibold">{{ item.confidence }}%</span>
+                            </div>
+                        </td>
+
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+        <!-- No history yet -->
+        <div class="text-center mt-5 py-5 bg-white rounded-4 shadow-sm">
+            <div class="fs-1 mb-3">📭</div>
+            <h5 class="text-muted">No scan history yet</h5>
+            <p class="text-muted">Start scanning job postings to see your history here</p>
+            <a href="/scan" class="btn btn-primary mt-2">🔍 Scan a Job Now</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+    // Set all progress bar widths
+    document.querySelectorAll('.progress-bar').forEach(function(bar) {
+        bar.style.width = bar.getAttribute('data-width') + '%';
+    });
+</script>
+
+</body>
+</html>

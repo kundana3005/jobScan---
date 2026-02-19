@@ -1,0 +1,34 @@
+[
+    {
+        "user": "gundimedakundanasrivalli@gmail.com",
+        "company": "google",
+        "salary": "3",
+        "description": "Global Infotech Solutions is urgently hiring candidates for simple data entry work. No experience is...",
+        "result": "REAL",
+        "confidence": 91.24
+    },
+    {
+        "user": "gundimedakundanasrivalli@gmail.com",
+        "company": "work from home",
+        "salary": "5000",
+        "description": "URGENT HIRING!!! Earn $5000 per week working from home!!! \r\nNo experience needed!!! No qualification...",
+        "result": "FAKE",
+        "confidence": 62.71
+    },
+    {
+        "user": "gundimedakundanasrivalli@gmail.com",
+        "company": "google",
+        "salary": "15",
+        "description": "We are looking for a Software Engineer with 2 years of experience \r\nin Python and Java. The candidat...",
+        "result": "REAL",
+        "confidence": 99.34
+    },
+    {
+        "user": "gundimedakundanasrivalli@gmail.com",
+        "company": "google",
+        "salary": "15",
+        "description": "We are looking for a Software Engineer with 2 years of experience \r\nin Python and Java. The candidat...",
+        "result": "REAL",
+        "confidence": 99.34
+    }
+]

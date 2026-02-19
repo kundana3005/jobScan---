@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Result - JobScan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark px-4 py-3" id="dashboard-nav">
+        <span class="navbar-brand fw-bold fs-5">🔍 JobScan</span>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-white">👤 {{ username }}</span>
+            <a href="/dashboard" class="btn btn-outline-light btn-sm">← Dashboard</a>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+
+        <!-- Result card -->
+        <div class="result-card p-5 rounded-4 text-center mb-4
+                    {{ 'result-fake' if result == 'FAKE' else 'result-real' }}">
+
+            <!-- Icon -->
+            {% if result == 'FAKE' %}
+                <div class="result-icon mb-3">🚨</div>
+                <h2 class="fw-bold text-danger">This Job is FAKE!</h2>
+                <p class="text-muted">This posting shows signs of fraud. Do not apply or share personal information.</p>
+            {% else %}
+                <div class="result-icon mb-3">✅</div>
+                <h2 class="fw-bold text-success">This Job looks REAL!</h2>
+                <p class="text-muted">This posting appears to be genuine. Always verify before applying.</p>
+            {% endif %}
+
+            <!-- Confidence score -->
+            <div class="confidence-box mt-4 p-3 rounded-3">
+                <h5 class="fw-bold mb-2">Confidence Score</h5>
+                <h3 class="fw-bold {{ 'text-danger' if result == 'FAKE' else 'text-success' }}">
+                    {{ confidence }}%
+                </h3>
+
+                <!-- Progress bar -->
+                <div class="progress mt-2" style="height: 14px; border-radius: 10px;">
+                    <div class="progress-bar {{ 'bg-danger' if result == 'FAKE' else 'bg-success' }}"
+                         id="confidenceBar"
+                         role="progressbar"
+                         aria-valuenow="{{ confidence }}"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Job details summary card -->
+        <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+            <h5 class="fw-bold mb-3">📋 Job Details Scanned</h5>
+
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <span class="text-muted">Company Name</span>
+                    <p class="fw-semibold mb-0">{{ company if company else 'Not provided' }}</p>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <span class="text-muted">Salary Range</span>
+                    <p class="fw-semibold mb-0">{{ salary if salary else 'Not provided' }}</p>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <span class="text-muted">Job Description (preview)</span>
+                <p class="fw-semibold mb-0">{{ description[:200] }}...</p>
+            </div>
+        </div>
+
+        <!-- Warning tips if FAKE -->
+        {% if result == 'FAKE' %}
+        <div class="alert alert-danger rounded-4 mb-4">
+            <h6 class="fw-bold">⚠️ Warning Signs to Watch For:</h6>
+            <ul class="mb-0">
+                <li>Asking for personal bank details or money upfront</li>
+                <li>Unrealistic salary offers with no experience required</li>
+                <li>Vague job description with no specific requirements</li>
+                <li>No company website or contact information</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- Action buttons -->
+        <div class="row g-3 text-center">
+
+            <!-- Scan another job -->
+            <div class="col-md-4">
+                <a href="/scan" class="btn btn-primary btn-lg w-100">
+                    🔍 Scan Another Job
+                </a>
+            </div>
+
+            <!-- Report fake -->
+            <div class="col-md-4">
+                <a href="/report" class="btn btn-danger btn-lg w-100">
+                    🚨 Report This Job
+                </a>
+            </div>
+
+            <!-- View history -->
+            <div class="col-md-4">
+                <a href="/history" class="btn btn-outline-secondary btn-lg w-100">
+                    📋 View History
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Set confidence bar width on page load
+        var confidenceBar = document.getElementById('confidenceBar');
+        if (confidenceBar) {
+            confidenceBar.style.width = '{{ confidence if confidence else 0 }}%';
+        }
+    </script>
+
+</body>
+</html>

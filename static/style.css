@@ -1,0 +1,258 @@
+/* ===== LANDING PAGE ===== */
+
+/* Dark gradient background for landing page */
+.landing-body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+}
+
+/* Navbar styling */
+#landing-nav {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Hero section — main poster area */
+.landing-hero {
+    padding: 80px 20px 60px;
+}
+
+/* Big shield emoji animation */
+.shield-icon {
+    font-size: 80px;
+    animation: bounce 2s infinite;
+}
+
+/* Bounce animation for shield */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Feature cards on landing page */
+.feature-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+/* ===== AUTH PAGES (Login & Signup) ===== */
+
+/* Light background for auth pages */
+.auth-body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Wrapper to center the card */
+.auth-wrapper {
+    width: 100%;
+    max-width: 460px;
+    padding: 20px;
+}
+
+/* White card for login/signup form */
+.auth-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+/* ===== DASHBOARD ===== */
+
+/* Dashboard page background */
+.dashboard-body {
+    background-color: #f4f6fb;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Dashboard navbar */
+#dashboard-nav {
+    background: linear-gradient(90deg, #302b63, #24243e);
+}
+
+/* Dashboard action cards */
+.dashboard-card {
+    background: white;
+    border: 2px solid #e8ecf4;
+    color: #333;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    border-color: #667eea;
+    box-shadow: 0 10px 30px rgba(102,126,234,0.2);
+}
+
+/* Highlighted card for Scan Job (most important) */
+.highlight-card {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #f0f3ff, #ffffff);
+}
+
+/* ===== JOB SCAN PAGE (index.html) ===== */
+
+body {
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 700px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Result box shared styles */
+.result-box {
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+/* Green when REAL */
+.result-box.real {
+    background-color: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+}
+
+/* Red when FAKE */
+.result-box.fake {
+    background-color: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+}/* ===== SEARCH JOB PAGE ===== */
+
+/* Individual job card */
+.job-card {
+    background: white;
+    border: 2px solid #e8ecf4;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.job-card:hover {
+    transform: translateY(-6px);
+    border-color: #667eea;
+    box-shadow: 0 10px 30px rgba(102,126,234,0.15);
+}
+
+/* Active category button */
+.active-cat {
+    background-color: #302b63 !important;
+    color: white !important;
+    border-color: #302b63 !important;
+}
+
+/* Category badges */
+.category-badge-ITSoftware {
+    background-color: #e8f0fe;
+    color: #3367d6;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.category-badge-Marketing {
+    background-color: #e6f4ea;
+    color: #137333;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.category-badge-Finance {
+    background-color: #fef7e0;
+    color: #b06000;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.category-badge-Healthcare {
+    background-color: #fce8e6;
+    color: #c5221f;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* ===== RESULT PAGE ===== */
+
+/* Result card for FAKE */
+.result-fake {
+    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+    border: 2px solid #dc3545;
+}
+
+/* Result card for REAL */
+.result-real {
+    background: linear-gradient(135deg, #f0fff4, #d4edda);
+    border: 2px solid #28a745;
+}
+
+/* Big result icon */
+.result-icon {
+    font-size: 80px;
+    animation: bounce 1.5s infinite;
+}
+
+/* Confidence score box */
+.confidence-box {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(5px);
+}
+
+/* ===== HISTORY PAGE ===== */
+
+/* Stats cards on history page */
+.stat-card {
+    border: 2px solid #e8ecf4;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Table styling */
+.table th {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.table td {
+    font-size: 0.9rem;
+}
+
+/* ===== REPORT PAGE ===== */
+
+/* Individual report item */
+.report-item {
+    background-color: #fff5f5;
+    border: 1px solid #f5c6cb;
+    transition: transform 0.2s;
+}
+
+.report-item:hover {
+    transform: translateY(-3px);
+}

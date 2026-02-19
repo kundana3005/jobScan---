@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Scan - Detect Fake Jobs</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing-body">
+
+    <!-- Navigation bar at top -->
+    <nav class="navbar navbar-dark px-4 py-3" id="landing-nav">
+        <span class="navbar-brand fw-bold fs-4">🔍 JobScan</span>
+        <div>
+            <!-- Clicking these opens login or signup page -->
+            <a href="/login" class="btn btn-outline-light me-2">Login</a>
+            <a href="/signup" class="btn btn-light text-dark">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Hero section — main poster area -->
+    <div class="landing-hero text-center text-white">
+
+        <!-- Big animated shield icon -->
+        <div class="shield-icon mb-4">🛡️</div>
+
+        <!-- Main heading -->
+        <h1 class="display-4 fw-bold mb-3">Detect Fake Job Postings</h1>
+
+        <!-- Subheading -->
+        <p class="lead mb-2">Don't fall for scams. Use AI to verify job postings instantly.</p>
+        <p class="mb-5 opacity-75">Powered by Machine Learning & NLP Technology</p>
+
+        <!-- Main call to action button -->
+        <a href="/signup" class="btn btn-warning btn-lg px-5 py-3 fw-bold me-3">
+            Get Started Free
+        </a>
+        <a href="/login" class="btn btn-outline-light btn-lg px-5 py-3">
+            Login
+        </a>
+
+        <!-- 3 feature cards below the buttons -->
+        <div class="row mt-5 justify-content-center g-4" id="feature-cards">
+
+            <div class="col-md-3">
+                <div class="feature-card p-4 rounded-4">
+                    <div class="fs-1 mb-2">🤖</div>
+                    <h5 class="fw-bold">AI Powered</h5>
+                    <p class="small opacity-75">Uses Naive Bayes ML model trained on thousands of job postings</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card p-4 rounded-4">
+                    <div class="fs-1 mb-2">⚡</div>
+                    <h5 class="fw-bold">Instant Results</h5>
+                    <p class="small opacity-75">Get prediction results in seconds with confidence score</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card p-4 rounded-4">
+                    <div class="fs-1 mb-2">📊</div>
+                    <h5 class="fw-bold">Track History</h5>
+                    <p class="small opacity-75">View all your past scans and reports in one place</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-white py-3 opacity-50">
+        <small>© 2024 JobScan — Fake Job Detection System | College Major Project</small>
+    </footer>
+
+</body>
+</html>

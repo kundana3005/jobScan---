@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - JobScan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-body">
+
+    <div class="auth-wrapper">
+        <div class="auth-card p-5">
+
+            <!-- Logo and title -->
+            <div class="text-center mb-4">
+                <div class="fs-1">🔍</div>
+                <h2 class="fw-bold">Welcome Back</h2>
+                <p class="text-muted">Login to your JobScan account</p>
+            </div>
+
+            <!-- Show error message if login fails -->
+            {% if error %}
+            <div class="alert alert-danger text-center">{{ error }}</div>
+            {% endif %}
+
+            <!-- Show success message (e.g. after signup) -->
+            {% if success %}
+            <div class="alert alert-success text-center">{{ success }}</div>
+            {% endif %}
+
+            <!-- Login form — sends data to /login route using POST -->
+            <form action="/login" method="POST">
+
+                <!-- Email field -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Email Address</label>
+                    <input type="email"
+                           class="form-control form-control-lg"
+                           name="email"
+                           placeholder="you@example.com"
+                           required>
+                </div>
+
+                <!-- Password field -->
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Password</label>
+                    <input type="password"
+                           class="form-control form-control-lg"
+                           name="password"
+                           placeholder="Enter your password"
+                           required>
+                </div>
+
+                <!-- Login button -->
+                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">
+                    Login
+                </button>
+
+            </form>
+
+            <!-- Link to signup page -->
+            <p class="text-center mt-4 text-muted">
+                Don't have an account? <a href="/signup" class="text-primary fw-bold">Sign Up</a>
+            </p>
+
+            <!-- Back to landing page -->
+            <p class="text-center">
+                <a href="/" class="text-muted small">← Back to Home</a>
+            </p>
+
+        </div>
+    </div>
+
+</body>
+</html>
