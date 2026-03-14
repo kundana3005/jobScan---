@@ -1,5 +1,9 @@
 /* ===== LANDING PAGE ===== */
 
+body {
+    font-family: Arial, sans-serif;
+}
+
 /* Dark gradient background for landing page */
 .landing-body {
     margin: 0;
@@ -15,21 +19,21 @@
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Hero section — main poster area */
+/* Hero section */
 .landing-hero {
     padding: 80px 20px 60px;
 }
 
-/* Big shield emoji animation */
+/* Bouncing shield icon */
 .shield-icon {
     font-size: 80px;
     animation: bounce 2s infinite;
 }
 
-/* Bounce animation for shield */
+/* Bounce animation */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50%       { transform: translateY(-15px); }
 }
 
 /* Feature cards on landing page */
@@ -44,9 +48,9 @@
     transform: translateY(-8px);
 }
 
+
 /* ===== AUTH PAGES (Login & Signup) ===== */
 
-/* Light background for auth pages */
 .auth-body {
     background: linear-gradient(135deg, #667eea, #764ba2);
     min-height: 100vh;
@@ -56,35 +60,31 @@
     font-family: Arial, sans-serif;
 }
 
-/* Wrapper to center the card */
 .auth-wrapper {
     width: 100%;
     max-width: 460px;
     padding: 20px;
 }
 
-/* White card for login/signup form */
 .auth-card {
     background: white;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
+
 /* ===== DASHBOARD ===== */
 
-/* Dashboard page background */
 .dashboard-body {
     background-color: #f4f6fb;
     min-height: 100vh;
     font-family: Arial, sans-serif;
 }
 
-/* Dashboard navbar */
 #dashboard-nav {
     background: linear-gradient(90deg, #302b63, #24243e);
 }
 
-/* Dashboard action cards */
 .dashboard-card {
     background: white;
     border: 2px solid #e8ecf4;
@@ -100,18 +100,13 @@
     box-shadow: 0 10px 30px rgba(102,126,234,0.2);
 }
 
-/* Highlighted card for Scan Job (most important) */
 .highlight-card {
     border-color: #667eea;
     background: linear-gradient(135deg, #f0f3ff, #ffffff);
 }
 
-/* ===== JOB SCAN PAGE (index.html) ===== */
 
-body {
-    background-color: #f0f2f5;
-    font-family: Arial, sans-serif;
-}
+/* ===== JOB SCAN PAGE ===== */
 
 .container {
     background-color: #ffffff;
@@ -121,28 +116,50 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Result box shared styles */
 .result-box {
     padding: 25px;
     border-radius: 10px;
     font-size: 1.2rem;
 }
 
-/* Green when REAL */
 .result-box.real {
     background-color: #d4edda;
     border: 2px solid #28a745;
     color: #155724;
 }
 
-/* Red when FAKE */
 .result-box.fake {
     background-color: #f8d7da;
     border: 2px solid #dc3545;
     color: #721c24;
-}/* ===== SEARCH JOB PAGE ===== */
+}
 
-/* Individual job card */
+
+/* ===== RESULT PAGE ===== */
+
+.result-fake {
+    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+    border: 2px solid #dc3545;
+}
+
+.result-real {
+    background: linear-gradient(135deg, #f0fff4, #d4edda);
+    border: 2px solid #28a745;
+}
+
+.result-icon {
+    font-size: 80px;
+    animation: bounce 1.5s infinite;
+}
+
+.confidence-box {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(5px);
+}
+
+
+/* ===== SEARCH JOB PAGE ===== */
+
 .job-card {
     background: white;
     border: 2px solid #e8ecf4;
@@ -156,7 +173,6 @@ body {
     box-shadow: 0 10px 30px rgba(102,126,234,0.15);
 }
 
-/* Active category button */
 .active-cat {
     background-color: #302b63 !important;
     color: white !important;
@@ -196,35 +212,20 @@ body {
     font-size: 0.8rem;
 }
 
-/* ===== RESULT PAGE ===== */
-
-/* Result card for FAKE */
-.result-fake {
-    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
-    border: 2px solid #dc3545;
+/* Modal styling */
+.detail-box {
+    background-color: #f8f9fa;
+    border: 1px solid #e8ecf4;
 }
 
-/* Result card for REAL */
-.result-real {
-    background: linear-gradient(135deg, #f0fff4, #d4edda);
-    border: 2px solid #28a745;
+.modal-content {
+    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
-/* Big result icon */
-.result-icon {
-    font-size: 80px;
-    animation: bounce 1.5s infinite;
-}
-
-/* Confidence score box */
-.confidence-box {
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(5px);
-}
 
 /* ===== HISTORY PAGE ===== */
 
-/* Stats cards on history page */
 .stat-card {
     border: 2px solid #e8ecf4;
     transition: transform 0.3s;
@@ -234,7 +235,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Table styling */
 .table th {
     font-weight: 600;
     font-size: 0.9rem;
@@ -244,9 +244,9 @@ body {
     font-size: 0.9rem;
 }
 
+
 /* ===== REPORT PAGE ===== */
 
-/* Individual report item */
 .report-item {
     background-color: #fff5f5;
     border: 1px solid #f5c6cb;
@@ -255,18 +255,4 @@ body {
 
 .report-item:hover {
     transform: translateY(-3px);
-}
-
-/* ===== MODAL STYLING ===== */
-
-/* Job detail box inside modal */
-.detail-box {
-    background-color: #f8f9fa;
-    border: 1px solid #e8ecf4;
-}
-
-/* Modal rounded corners */
-.modal-content {
-    border: none;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
