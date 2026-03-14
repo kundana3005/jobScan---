@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "user": "123456@gmail.com",
+        "company": "work from home",
+        "salary": "5000",
+        "description": "URGENT HIRING!!! Work from home data entry job!!!\r\nEarn $500 per day with no experience needed!!!\r\nN...",
+        "result": "REAL",
+        "confidence": 51.93
+    },
+    {
+        "user": "123456@gmail.com",
+        "company": "Global online job",
+        "salary": "5000",
+        "description": "We are urgently hiring data entry operators and online \r\nworkers for immediate work from home positi...",
+        "result": "REAL",
+        "confidence": 77.3
+    },
+    {
+        "user": "123456@gmail.com",
+        "company": "work from home",
+        "salary": "5000",
+        "description": "URGENT HIRING!!! Work from home data entry job!!!\r\nEarn $500 per day with no experience needed!!!\r\nN...",
+        "result": "FAKE",
+        "confidence": 99.0
+    }
+]
