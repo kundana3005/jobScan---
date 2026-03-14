@@ -23,106 +23,260 @@
 
         <!-- Page heading -->
         <h3 class="fw-bold mb-1">🔎 Search Jobs</h3>
-        <p class="text-muted mb-4">Browse job listings across different roles and categories</p>
+        <p class="text-muted mb-4">Browse job listings and explore required skills and responsibilities</p>
 
         <!-- Search bar -->
         <div class="row mb-4">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <input type="text"
                        class="form-control form-control-lg"
                        id="searchInput"
-                       placeholder="Search by job title, company or keyword...">
+                       placeholder="Search by job title, skill or company...">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <button class="btn btn-primary btn-lg w-100" onclick="filterJobs()">
-                    Search
+                    🔍 Search
                 </button>
             </div>
         </div>
 
         <!-- Category filter buttons -->
-        <div class="mb-4" id="categoryFilters">
-            <button class="btn btn-dark me-2 mb-2 category-btn active-cat" onclick="filterByCategory('All')">All</button>
-            <button class="btn btn-outline-primary me-2 mb-2 category-btn" onclick="filterByCategory('IT / Software')">💻 IT / Software</button>
-            <button class="btn btn-outline-success me-2 mb-2 category-btn" onclick="filterByCategory('Marketing')">📣 Marketing</button>
-            <button class="btn btn-outline-warning me-2 mb-2 category-btn" onclick="filterByCategory('Finance')">💰 Finance</button>
-            <button class="btn btn-outline-danger me-2 mb-2 category-btn" onclick="filterByCategory('Healthcare')">🏥 Healthcare</button>
+        <div class="mb-4">
+            <button class="btn btn-dark me-2 mb-2 category-btn" onclick="filterByCategory('All', this)">All</button>
+            <button class="btn btn-outline-primary me-2 mb-2 category-btn" onclick="filterByCategory('IT / Software', this)">💻 IT / Software</button>
+            <button class="btn btn-outline-success me-2 mb-2 category-btn" onclick="filterByCategory('Marketing', this)">📣 Marketing</button>
+            <button class="btn btn-outline-warning me-2 mb-2 category-btn" onclick="filterByCategory('Finance', this)">💰 Finance</button>
+            <button class="btn btn-outline-danger me-2 mb-2 category-btn" onclick="filterByCategory('Healthcare', this)">🏥 Healthcare</button>
         </div>
 
         <!-- Results count -->
         <p class="text-muted mb-3" id="resultCount"></p>
 
-        <!-- Job cards grid -->
+        <!-- Job cards -->
         <div class="row g-4" id="jobCards">
-
             {% for job in jobs %}
             <div class="col-md-4 job-card-wrapper"
                  data-category="{{ job.category }}"
                  data-title="{{ job.title | lower }}"
-                 data-company="{{ job.company | lower }}">
+                 data-company="{{ job.company | lower }}"
+                 data-skills="{{ job.skills | join(' ') | lower }}">
 
-                <div class="job-card p-4 rounded-4 h-100">
+                <div class="job-card p-4 rounded-4 h-100 d-flex flex-column">
 
-                    <!-- Category badge -->
-                    <span class="badge mb-3 category-badge-{{ job.category | replace('/', '') | replace(' ', '') }}">
-                        {{ job.category }}
-                    </span>
+                    <!-- Top section -->
+                    <div class="flex-grow-1">
 
-                    <!-- Job title -->
-                    <h5 class="fw-bold mb-1">{{ job.title }}</h5>
+                        <!-- Category + Work type badges -->
+                        <div class="d-flex gap-2 mb-3 flex-wrap">
+                            <span class="badge category-badge-{{ job.category | replace('/', '') | replace(' ', '') }}">
+                                {{ job.category }}
+                            </span>
+                            <span class="badge {{ 'bg-info' if job.work_type == 'Remote' else 'bg-secondary' }}">
+                                {{ job.work_type }}
+                            </span>
+                        </div>
 
-                    <!-- Company name -->
-                    <p class="text-muted mb-1">🏢 {{ job.company }}</p>
+                        <!-- Job title -->
+                        <h5 class="fw-bold mb-1">{{ job.title }}</h5>
 
-                    <!-- Location -->
-                    <p class="text-muted mb-1">📍 {{ job.location }}</p>
+                        <!-- Company -->
+                        <p class="text-muted mb-1">🏢 {{ job.company }}</p>
 
-                    <!-- Salary -->
-                    <p class="text-success fw-semibold mb-3">💰 {{ job.salary }}</p>
+                        <!-- Location -->
+                        <p class="text-muted mb-1">📍 {{ job.location }}</p>
 
-                    <!-- Short description -->
-                    <p class="small text-muted mb-4">{{ job.description }}</p>
+                        <!-- Salary -->
+                        <p class="text-success fw-semibold mb-2">💰 {{ job.salary }}</p>
 
-                    <!-- Scan this job button -->
-                    <a href="/scan?title={{ job.title }}&company={{ job.company }}"
-                       class="btn btn-primary w-100">
-                        🛡️ Scan This Job
-                    </a>
+                        <!-- Experience -->
+                        <p class="small text-muted mb-3">🎓 {{ job.experience }}</p>
+
+                        <!-- Skills preview — show first 3 only -->
+                        <div class="mb-3">
+                            {% for skill in job.skills %}
+                                {% if loop.index <= 3 %}
+                                <span class="badge bg-light text-dark border me-1 mb-1">{{ skill }}</span>
+                                {% endif %}
+                            {% endfor %}
+                            {% if job.skills|length > 3 %}
+                            <span class="badge bg-light text-muted border">+{{ job.skills|length - 3 }} more</span>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    <!-- Buttons at bottom -->
+                    <div class="d-flex gap-2 mt-2">
+                        <button class="btn btn-outline-primary flex-grow-1"
+                                onclick="showJobDetails({{ loop.index0 }})">
+                            📋 View Details
+                        </button>
+                        <a href="/scan?title={{ job.title }}&company={{ job.company }}"
+                           class="btn btn-primary flex-grow-1">
+                            🛡️ Scan
+                        </a>
+                    </div>
 
                 </div>
             </div>
             {% endfor %}
-
         </div>
 
         <!-- No results message -->
         <div class="text-center mt-5 d-none" id="noResults">
             <div class="fs-1">😕</div>
-            <h5 class="text-muted">No jobs found matching your search</h5>
+            <h5 class="text-muted">No jobs found</h5>
             <button class="btn btn-outline-primary mt-2" onclick="resetFilters()">Show All Jobs</button>
         </div>
 
     </div>
 
-    <!-- JavaScript for search and filter -->
+    <!-- JOB DETAIL MODAL -->
+    <div class="modal fade" id="jobModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content rounded-4">
+
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body pt-2">
+
+                    <!-- Company + location + salary + work type -->
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <span class="text-muted" id="modalCompany"></span>
+                        <span class="text-muted" id="modalLocation"></span>
+                        <span class="text-success fw-semibold" id="modalSalary"></span>
+                        <span class="badge" id="modalWorkType"></span>
+                    </div>
+
+                    <!-- Experience + Education -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="detail-box p-3 rounded-3">
+                                <h6 class="fw-bold mb-1">🎓 Experience Required</h6>
+                                <p class="mb-0" id="modalExperience"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="detail-box p-3 rounded-3">
+                                <h6 class="fw-bold mb-1">📚 Education</h6>
+                                <p class="mb-0" id="modalEducation"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Required Skills -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold mb-2">🛠️ Required Skills</h6>
+                        <div id="modalSkills"></div>
+                    </div>
+
+                    <!-- Responsibilities -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-2">📋 Job Responsibilities</h6>
+                        <ul id="modalResponsibilities" class="ps-3"></ul>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-0">
+                    <a id="modalScanBtn" href="#" class="btn btn-primary w-100 fw-bold">
+                        🛡️ Scan This Job for Fake Detection
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS — MUST be before our script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // Run on page load to show count
-        window.onload = function() {
-            updateCount();
+        // Store all jobs from Flask as JavaScript array
+        const jobs = {{ jobs | tojson }};
+
+        // Run after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCount(jobs.length);
+            document.getElementById('searchInput').addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') filterJobs();
+            });
+        });
+
+        // Show job details in modal
+        function showJobDetails(index) {
+            const job = jobs[index];
+
+            // Safety check
+            if (!job) {
+                alert('Job not found!');
+                return;
+            }
+
+            // Fill basic details
+            document.getElementById('modalTitle').innerText    = job.title    || 'Not specified';
+            document.getElementById('modalCompany').innerText  = '🏢 ' + (job.company  || 'Not specified');
+            document.getElementById('modalLocation').innerText = '📍 ' + (job.location || 'Not specified');
+            document.getElementById('modalSalary').innerText   = '💰 ' + (job.salary   || 'Not specified');
+
+            // Experience and Education
+            document.getElementById('modalExperience').innerText = job.experience || 'Not specified';
+            document.getElementById('modalEducation').innerText  = job.education  || 'Not specified';
+
+            // Work type badge
+            const workBadge     = document.getElementById('modalWorkType');
+            workBadge.innerText = job.work_type || 'Not specified';
+            workBadge.className = 'badge ' + (job.work_type === 'Remote' ? 'bg-info' : 'bg-secondary');
+
+            // Skills badges
+            const skillsDiv     = document.getElementById('modalSkills');
+            skillsDiv.innerHTML = '';
+            if (job.skills && job.skills.length > 0) {
+                job.skills.forEach(function(skill) {
+                    skillsDiv.innerHTML += `<span class="badge bg-primary me-1 mb-2 px-3 py-2">${skill}</span>`;
+                });
+            } else {
+                skillsDiv.innerHTML = '<span class="text-muted">Not specified</span>';
+            }
+
+            // Responsibilities list
+            const respList     = document.getElementById('modalResponsibilities');
+            respList.innerHTML = '';
+            if (job.responsibilities && job.responsibilities.length > 0) {
+                job.responsibilities.forEach(function(resp) {
+                    respList.innerHTML += `<li class="mb-2">${resp}</li>`;
+                });
+            } else {
+                respList.innerHTML = '<li class="text-muted">Not specified</li>';
+            }
+
+            // Scan button link
+            document.getElementById('modalScanBtn').href =
+                '/scan?title='   + encodeURIComponent(job.title   || '') +
+                '&company=' + encodeURIComponent(job.company || '');
+
+            // Show modal
+            var modal = new bootstrap.Modal(document.getElementById('jobModal'));
+            modal.show();
         }
 
-        // Filter by search input text
+        // Filter by search text
         function filterJobs() {
-            let searchText = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.job-card-wrapper');
-            let visible = 0;
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const cards      = document.querySelectorAll('.job-card-wrapper');
+            let visible      = 0;
 
             cards.forEach(function(card) {
-                let title = card.getAttribute('data-title');
-                let company = card.getAttribute('data-company');
+                const title   = card.getAttribute('data-title')   || '';
+                const company = card.getAttribute('data-company') || '';
+                const skills  = card.getAttribute('data-skills')  || '';
 
-                // Show card if title or company matches search text
-                if (title.includes(searchText) || company.includes(searchText)) {
+                if (title.includes(searchText) ||
+                    company.includes(searchText) ||
+                    skills.includes(searchText)) {
                     card.style.display = 'block';
                     visible++;
                 } else {
@@ -135,22 +289,27 @@
         }
 
         // Filter by category button
-        function filterByCategory(category) {
-            // Update active button style
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active-cat', 'btn-dark');
-                btn.classList.add('btn-outline-primary');
+        function filterByCategory(category, btn) {
+            // Reset all buttons
+            document.querySelectorAll('.category-btn').forEach(b => {
+                b.classList.remove('btn-dark');
+                if (!b.classList.contains('btn-outline-success') &&
+                    !b.classList.contains('btn-outline-warning') &&
+                    !b.classList.contains('btn-outline-danger')) {
+                    b.classList.add('btn-outline-primary');
+                }
             });
-            event.target.classList.add('active-cat', 'btn-dark');
-            event.target.classList.remove('btn-outline-primary');
 
-            let cards = document.querySelectorAll('.job-card-wrapper');
+            // Highlight clicked button
+            btn.classList.remove('btn-outline-primary', 'btn-outline-success',
+                                 'btn-outline-warning', 'btn-outline-danger');
+            btn.classList.add('btn-dark');
+
+            const cards = document.querySelectorAll('.job-card-wrapper');
             let visible = 0;
 
             cards.forEach(function(card) {
-                let cardCategory = card.getAttribute('data-category');
-
-                if (category === 'All' || cardCategory === category) {
+                if (category === 'All' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
                     visible++;
                 } else {
@@ -158,45 +317,29 @@
                 }
             });
 
-            // Clear search input when filtering by category
             document.getElementById('searchInput').value = '';
-
             updateCount(visible);
             toggleNoResults(visible);
         }
 
         // Reset all filters
         function resetFilters() {
-            document.querySelectorAll('.job-card-wrapper').forEach(card => {
-                card.style.display = 'block';
-            });
+            document.querySelectorAll('.job-card-wrapper').forEach(c => c.style.display = 'block');
             document.getElementById('searchInput').value = '';
             document.getElementById('noResults').classList.add('d-none');
-            updateCount();
+            updateCount(jobs.length);
         }
 
-        // Update result count text
+        // Update result count
         function updateCount(count) {
-            let total = count !== undefined ? count : document.querySelectorAll('.job-card-wrapper').length;
-            document.getElementById('resultCount').innerText = total + ' jobs found';
+            document.getElementById('resultCount').innerText = count + ' jobs found';
         }
 
         // Show or hide no results message
         function toggleNoResults(visible) {
-            let noResults = document.getElementById('noResults');
-            if (visible === 0) {
-                noResults.classList.remove('d-none');
-            } else {
-                noResults.classList.add('d-none');
-            }
+            document.getElementById('noResults').classList.toggle('d-none', visible > 0);
         }
 
-        // Search on Enter key press
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('searchInput').addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') filterJobs();
-            });
-        });
     </script>
 
 </body>

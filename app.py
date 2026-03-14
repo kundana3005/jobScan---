@@ -188,119 +188,464 @@ def search():
     if 'user_email' not in session:
         return redirect(url_for('login'))
 
-    # Sample job listings data
-    # In a real project this would come from a database
     jobs = [
-        # IT / Software
+
+        # ── IT / SOFTWARE ──────────────────────────────────────
         {
-            "title": "Python Developer",
-            "company": "TechCorp India",
-            "location": "Bangalore, India",
-            "salary": "6-10 LPA",
-            "category": "IT / Software",
-            "description": "Looking for an experienced Python developer with Flask and Django skills."
+            "title"          : "Python Developer",
+            "company"        : "TechCorp India",
+            "location"       : "Bangalore, India",
+            "salary"         : "6-10 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Hybrid",
+            "experience"     : "2-4 years",
+            "education"      : "B.E / B.Tech in Computer Science",
+            "skills"         : ["Python", "Flask", "Django", "REST APIs", "MySQL", "Git"],
+            "responsibilities": [
+                "Develop and maintain Python-based web applications",
+                "Design and implement REST APIs for frontend integration",
+                "Write clean, testable and efficient code",
+                "Collaborate with frontend developers and designers",
+                "Participate in code reviews and sprint planning"
+            ]
         },
         {
-            "title": "Frontend Developer",
-            "company": "WebSolutions Pvt Ltd",
-            "location": "Hyderabad, India",
-            "salary": "5-8 LPA",
-            "category": "IT / Software",
-            "description": "Build beautiful web interfaces using HTML, CSS, React and Bootstrap."
+            "title"          : "Frontend Developer",
+            "company"        : "WebSolutions Pvt Ltd",
+            "location"       : "Hyderabad, India",
+            "salary"         : "5-8 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Onsite",
+            "experience"     : "1-3 years",
+            "education"      : "B.E / B.Tech or BCA",
+            "skills"         : ["HTML", "CSS", "JavaScript", "React", "Bootstrap", "Git"],
+            "responsibilities": [
+                "Build responsive and accessible web interfaces",
+                "Convert UI/UX designs into working code",
+                "Optimize web pages for performance and speed",
+                "Work with backend developers on API integration",
+                "Fix cross-browser compatibility issues"
+            ]
         },
         {
-            "title": "Data Scientist",
-            "company": "Analytics Hub",
-            "location": "Pune, India",
-            "salary": "10-15 LPA",
-            "category": "IT / Software",
-            "description": "Work on ML models, data pipelines and business intelligence dashboards."
+            "title"          : "Data Scientist",
+            "company"        : "Analytics Hub",
+            "location"       : "Pune, India",
+            "salary"         : "10-15 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Hybrid",
+            "experience"     : "3-5 years",
+            "education"      : "M.Tech / M.Sc in Data Science or Statistics",
+            "skills"         : ["Python", "Machine Learning", "Pandas", "NumPy", "Scikit-learn", "Tableau"],
+            "responsibilities": [
+                "Build and evaluate machine learning models",
+                "Analyze large datasets to find patterns and insights",
+                "Create dashboards and data visualizations",
+                "Present findings to business stakeholders",
+                "Collaborate with engineers to deploy models"
+            ]
         },
         {
-            "title": "Cybersecurity Analyst",
-            "company": "SecureNet Ltd",
-            "location": "Chennai, India",
-            "salary": "8-12 LPA",
-            "category": "IT / Software",
-            "description": "Monitor and protect company systems from cyber threats and vulnerabilities."
+            "title"          : "Cybersecurity Analyst",
+            "company"        : "SecureNet Ltd",
+            "location"       : "Chennai, India",
+            "salary"         : "8-12 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Onsite",
+            "experience"     : "2-4 years",
+            "education"      : "B.Tech in IT / Cybersecurity certification",
+            "skills"         : ["Network Security", "Penetration Testing", "SIEM", "Firewalls", "Python", "Linux"],
+            "responsibilities": [
+                "Monitor systems for security threats and vulnerabilities",
+                "Conduct penetration testing and risk assessments",
+                "Respond to security incidents and breaches",
+                "Implement security policies and procedures",
+                "Train staff on cybersecurity best practices"
+            ]
+        },
+        {
+            "title"          : "DevOps Engineer",
+            "company"        : "CloudBase Technologies",
+            "location"       : "Bangalore, India",
+            "salary"         : "12-18 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Remote",
+            "experience"     : "3-6 years",
+            "education"      : "B.Tech in Computer Science or IT",
+            "skills"         : ["Docker", "Kubernetes", "AWS", "CI/CD", "Jenkins", "Linux", "Terraform"],
+            "responsibilities": [
+                "Build and maintain CI/CD pipelines",
+                "Manage cloud infrastructure on AWS or Azure",
+                "Automate deployment and monitoring processes",
+                "Ensure system reliability and uptime",
+                "Collaborate with development teams on releases"
+            ]
+        },
+        {
+            "title"          : "Android Developer",
+            "company"        : "AppStudio India",
+            "location"       : "Delhi, India",
+            "salary"         : "6-11 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Hybrid",
+            "experience"     : "2-4 years",
+            "education"      : "B.Tech / BCA in Computer Science",
+            "skills"         : ["Java", "Kotlin", "Android SDK", "Firebase", "REST APIs", "Git"],
+            "responsibilities": [
+                "Design and build Android mobile applications",
+                "Integrate REST APIs and third-party libraries",
+                "Ensure app performance and quality",
+                "Fix bugs and improve application performance",
+                "Publish and maintain apps on Google Play Store"
+            ]
+        },
+        {
+            "title"          : "Machine Learning Engineer",
+            "company"        : "AI Innovations Pvt Ltd",
+            "location"       : "Bangalore, India",
+            "salary"         : "14-20 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Remote",
+            "experience"     : "3-5 years",
+            "education"      : "M.Tech in AI/ML or Computer Science",
+            "skills"         : ["Python", "TensorFlow", "PyTorch", "NLP", "Deep Learning", "MLOps"],
+            "responsibilities": [
+                "Design and train deep learning models",
+                "Deploy ML models into production environments",
+                "Optimize model performance and accuracy",
+                "Research and implement latest ML techniques",
+                "Work with data engineers on pipeline development"
+            ]
+        },
+        {
+            "title"          : "Database Administrator",
+            "company"        : "DataSafe Corp",
+            "location"       : "Mumbai, India",
+            "salary"         : "7-12 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Onsite",
+            "experience"     : "3-5 years",
+            "education"      : "B.Tech in Computer Science or IT",
+            "skills"         : ["MySQL", "PostgreSQL", "Oracle", "MongoDB", "SQL", "Backup & Recovery"],
+            "responsibilities": [
+                "Install, configure and maintain database systems",
+                "Monitor database performance and optimize queries",
+                "Implement data backup and recovery procedures",
+                "Manage database security and access controls",
+                "Troubleshoot database issues and outages"
+            ]
+        },
+        {
+            "title"          : "UI/UX Designer",
+            "company"        : "DesignFirst Agency",
+            "location"       : "Hyderabad, India",
+            "salary"         : "5-9 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Hybrid",
+            "experience"     : "2-4 years",
+            "education"      : "B.Des or B.Tech with design portfolio",
+            "skills"         : ["Figma", "Adobe XD", "Sketch", "Wireframing", "Prototyping", "User Research"],
+            "responsibilities": [
+                "Design intuitive user interfaces for web and mobile",
+                "Create wireframes, prototypes and mockups",
+                "Conduct user research and usability testing",
+                "Collaborate with developers for implementation",
+                "Maintain and improve design systems"
+            ]
+        },
+        {
+            "title"          : "Full Stack Developer",
+            "company"        : "StartupNest",
+            "location"       : "Remote",
+            "salary"         : "9-15 LPA",
+            "category"       : "IT / Software",
+            "work_type"      : "Remote",
+            "experience"     : "3-5 years",
+            "education"      : "B.Tech in Computer Science",
+            "skills"         : ["React", "Node.js", "Python", "MongoDB", "REST APIs", "AWS", "Git"],
+            "responsibilities": [
+                "Build end-to-end web applications",
+                "Develop frontend with React and backend with Node.js",
+                "Design and manage databases",
+                "Deploy applications on cloud platforms",
+                "Write unit tests and documentation"
+            ]
         },
 
-        # Marketing
+        # ── MARKETING ──────────────────────────────────────────
         {
-            "title": "Digital Marketing Manager",
-            "company": "BrandBoost Agency",
-            "location": "Mumbai, India",
-            "salary": "5-9 LPA",
-            "category": "Marketing",
-            "description": "Manage SEO, SEM, social media campaigns and content strategy."
+            "title"          : "Digital Marketing Manager",
+            "company"        : "BrandBoost Agency",
+            "location"       : "Mumbai, India",
+            "salary"         : "5-9 LPA",
+            "category"       : "Marketing",
+            "work_type"      : "Hybrid",
+            "experience"     : "3-5 years",
+            "education"      : "MBA in Marketing or BBA",
+            "skills"         : ["SEO", "SEM", "Google Ads", "Social Media", "Analytics", "Content Strategy"],
+            "responsibilities": [
+                "Plan and execute digital marketing campaigns",
+                "Manage SEO and SEM strategies",
+                "Analyze campaign performance using Google Analytics",
+                "Oversee social media presence and engagement",
+                "Coordinate with content and design teams"
+            ]
         },
         {
-            "title": "Content Writer",
-            "company": "Creative Minds",
-            "location": "Remote",
-            "salary": "3-5 LPA",
-            "category": "Marketing",
-            "description": "Write engaging blog posts, social media content and marketing copy."
+            "title"          : "Content Writer",
+            "company"        : "Creative Minds",
+            "location"       : "Remote",
+            "salary"         : "3-5 LPA",
+            "category"       : "Marketing",
+            "work_type"      : "Remote",
+            "experience"     : "1-2 years",
+            "education"      : "BA in English / Mass Communication",
+            "skills"         : ["Content Writing", "SEO Writing", "Blogging", "Copywriting", "Research", "WordPress"],
+            "responsibilities": [
+                "Write engaging blog posts and articles",
+                "Create SEO optimized content for websites",
+                "Write social media posts and captions",
+                "Edit and proofread content before publishing",
+                "Research industry topics and trends"
+            ]
         },
         {
-            "title": "Social Media Executive",
-            "company": "GrowthHack Media",
-            "location": "Delhi, India",
-            "salary": "3-6 LPA",
-            "category": "Marketing",
-            "description": "Handle Instagram, LinkedIn and Twitter accounts for multiple brands."
+            "title"          : "Social Media Executive",
+            "company"        : "GrowthHack Media",
+            "location"       : "Delhi, India",
+            "salary"         : "3-6 LPA",
+            "category"       : "Marketing",
+            "work_type"      : "Onsite",
+            "experience"     : "1-3 years",
+            "education"      : "BBA / BA in Mass Communication",
+            "skills"         : ["Instagram", "LinkedIn", "Twitter", "Canva", "Content Calendar", "Analytics"],
+            "responsibilities": [
+                "Manage social media accounts for multiple brands",
+                "Create and schedule daily content posts",
+                "Engage with followers and respond to comments",
+                "Track social media performance metrics",
+                "Run paid social media campaigns"
+            ]
+        },
+        {
+            "title"          : "Brand Manager",
+            "company"        : "ConsumerFirst Brands",
+            "location"       : "Mumbai, India",
+            "salary"         : "8-14 LPA",
+            "category"       : "Marketing",
+            "work_type"      : "Onsite",
+            "experience"     : "4-7 years",
+            "education"      : "MBA in Marketing",
+            "skills"         : ["Brand Strategy", "Market Research", "Campaign Management", "P&L Management", "Leadership"],
+            "responsibilities": [
+                "Define and execute brand strategy",
+                "Manage brand identity across all channels",
+                "Conduct market research and competitor analysis",
+                "Plan and oversee marketing campaigns",
+                "Monitor brand health and consumer perception"
+            ]
+        },
+        {
+            "title"          : "Email Marketing Specialist",
+            "company"        : "LeadGen Solutions",
+            "location"       : "Bangalore, India",
+            "salary"         : "4-7 LPA",
+            "category"       : "Marketing",
+            "work_type"      : "Remote",
+            "experience"     : "2-4 years",
+            "education"      : "BBA / MBA in Marketing",
+            "skills"         : ["Mailchimp", "HubSpot", "Email Copywriting", "A/B Testing", "Segmentation", "Analytics"],
+            "responsibilities": [
+                "Design and send email marketing campaigns",
+                "Segment email lists for targeted campaigns",
+                "Write compelling email copy and subject lines",
+                "Analyze open rates, click rates and conversions",
+                "Run A/B tests to improve campaign performance"
+            ]
         },
 
-        # Finance
+        # ── FINANCE ────────────────────────────────────────────
         {
-            "title": "Financial Analyst",
-            "company": "MoneyWise Corp",
-            "location": "Mumbai, India",
-            "salary": "7-12 LPA",
-            "category": "Finance",
-            "description": "Analyze financial data, prepare reports and support investment decisions."
+            "title"          : "Financial Analyst",
+            "company"        : "MoneyWise Corp",
+            "location"       : "Mumbai, India",
+            "salary"         : "7-12 LPA",
+            "category"       : "Finance",
+            "work_type"      : "Onsite",
+            "experience"     : "2-4 years",
+            "education"      : "B.Com / MBA in Finance / CA",
+            "skills"         : ["Financial Modeling", "Excel", "Power BI", "Forecasting", "Budgeting", "SAP"],
+            "responsibilities": [
+                "Analyze financial statements and reports",
+                "Prepare financial models and forecasts",
+                "Support budgeting and planning processes",
+                "Present financial insights to management",
+                "Monitor key financial performance indicators"
+            ]
         },
         {
-            "title": "Chartered Accountant",
-            "company": "Deloitte India",
-            "location": "Bangalore, India",
-            "salary": "10-18 LPA",
-            "category": "Finance",
-            "description": "Handle audits, tax planning and financial compliance for enterprise clients."
+            "title"          : "Chartered Accountant",
+            "company"        : "Deloitte India",
+            "location"       : "Bangalore, India",
+            "salary"         : "10-18 LPA",
+            "category"       : "Finance",
+            "work_type"      : "Hybrid",
+            "experience"     : "3-6 years",
+            "education"      : "CA qualification from ICAI",
+            "skills"         : ["Auditing", "Tax Planning", "Financial Reporting", "Tally", "GST", "IFRS"],
+            "responsibilities": [
+                "Conduct statutory and internal audits",
+                "Prepare and file tax returns",
+                "Ensure compliance with financial regulations",
+                "Advise clients on tax planning strategies",
+                "Review financial statements for accuracy"
+            ]
         },
         {
-            "title": "Investment Banker",
-            "company": "Capital First",
-            "location": "Mumbai, India",
-            "salary": "15-25 LPA",
-            "category": "Finance",
-            "description": "Support mergers, acquisitions and fundraising for corporate clients."
+            "title"          : "Investment Banker",
+            "company"        : "Capital First",
+            "location"       : "Mumbai, India",
+            "salary"         : "15-25 LPA",
+            "category"       : "Finance",
+            "work_type"      : "Onsite",
+            "experience"     : "4-8 years",
+            "education"      : "MBA in Finance from top institute / CA",
+            "skills"         : ["Valuation", "Financial Modeling", "M&A", "Due Diligence", "Excel", "Pitchbooks"],
+            "responsibilities": [
+                "Advise clients on mergers and acquisitions",
+                "Prepare financial models and valuation reports",
+                "Conduct due diligence for deals",
+                "Pitch investment opportunities to clients",
+                "Manage relationships with institutional investors"
+            ]
+        },
+        {
+            "title"          : "Risk Analyst",
+            "company"        : "SafeGuard Finance",
+            "location"       : "Hyderabad, India",
+            "salary"         : "6-10 LPA",
+            "category"       : "Finance",
+            "work_type"      : "Hybrid",
+            "experience"     : "2-4 years",
+            "education"      : "MBA Finance / B.Com with FRM certification",
+            "skills"         : ["Risk Assessment", "Excel", "Statistical Analysis", "Basel III", "Python", "Reporting"],
+            "responsibilities": [
+                "Identify and assess financial and operational risks",
+                "Develop risk mitigation strategies",
+                "Prepare risk reports for senior management",
+                "Monitor market and credit risk indicators",
+                "Ensure compliance with regulatory requirements"
+            ]
+        },
+        {
+            "title"          : "Accounts Manager",
+            "company"        : "RetailChain India",
+            "location"       : "Chennai, India",
+            "salary"         : "5-8 LPA",
+            "category"       : "Finance",
+            "work_type"      : "Onsite",
+            "experience"     : "3-5 years",
+            "education"      : "B.Com / M.Com / MBA Finance",
+            "skills"         : ["Tally", "GST Filing", "Accounts Payable", "Accounts Receivable", "MIS Reports", "Excel"],
+            "responsibilities": [
+                "Manage day-to-day accounting operations",
+                "Prepare monthly MIS reports",
+                "Handle GST filing and compliance",
+                "Oversee accounts payable and receivable",
+                "Coordinate with auditors during audit season"
+            ]
         },
 
-        # Healthcare
+        # ── HEALTHCARE ─────────────────────────────────────────
         {
-            "title": "Clinical Data Analyst",
-            "company": "HealthTech Solutions",
-            "location": "Hyderabad, India",
-            "salary": "6-10 LPA",
-            "category": "Healthcare",
-            "description": "Analyze patient data and clinical trial results to support medical research."
+            "title"          : "Clinical Data Analyst",
+            "company"        : "HealthTech Solutions",
+            "location"       : "Hyderabad, India",
+            "salary"         : "6-10 LPA",
+            "category"       : "Healthcare",
+            "work_type"      : "Hybrid",
+            "experience"     : "2-4 years",
+            "education"      : "B.Pharm / M.Sc Life Sciences / Bioinformatics",
+            "skills"         : ["Clinical Trials", "SAS", "R", "Data Management", "CDISC", "Excel"],
+            "responsibilities": [
+                "Analyze clinical trial data for accuracy",
+                "Prepare data analysis reports for research teams",
+                "Ensure compliance with clinical data standards",
+                "Support regulatory submissions with data",
+                "Work with statisticians on study outcomes"
+            ]
         },
         {
-            "title": "Hospital Administrator",
-            "company": "Apollo Hospitals",
-            "location": "Chennai, India",
-            "salary": "5-8 LPA",
-            "category": "Healthcare",
-            "description": "Manage hospital operations, staff coordination and patient services."
+            "title"          : "Hospital Administrator",
+            "company"        : "Apollo Hospitals",
+            "location"       : "Chennai, India",
+            "salary"         : "5-8 LPA",
+            "category"       : "Healthcare",
+            "work_type"      : "Onsite",
+            "experience"     : "3-6 years",
+            "education"      : "MBA in Hospital Administration / MHA",
+            "skills"         : ["Hospital Management", "Patient Services", "Staff Coordination", "Budgeting", "Compliance"],
+            "responsibilities": [
+                "Oversee daily hospital operations",
+                "Manage staff schedules and performance",
+                "Ensure patient satisfaction and safety standards",
+                "Handle hospital budgeting and procurement",
+                "Liaise with doctors, nurses and support staff"
+            ]
         },
         {
-            "title": "Medical Coder",
-            "company": "MedBill India",
-            "location": "Remote",
-            "salary": "3-6 LPA",
-            "category": "Healthcare",
-            "description": "Assign medical codes to diagnoses and procedures for billing purposes."
+            "title"          : "Medical Coder",
+            "company"        : "MedBill India",
+            "location"       : "Remote",
+            "salary"         : "3-6 LPA",
+            "category"       : "Healthcare",
+            "work_type"      : "Remote",
+            "experience"     : "1-3 years",
+            "education"      : "B.Sc / Diploma with CPC certification",
+            "skills"         : ["ICD-10", "CPT Coding", "Medical Billing", "HIPAA", "EHR Systems", "Attention to Detail"],
+            "responsibilities": [
+                "Assign correct medical codes to diagnoses",
+                "Review patient records for accurate coding",
+                "Ensure compliance with HIPAA regulations",
+                "Communicate with insurance companies",
+                "Submit and follow up on medical claims"
+            ]
+        },
+        {
+            "title"          : "Healthcare IT Specialist",
+            "company"        : "MedTech Systems",
+            "location"       : "Bangalore, India",
+            "salary"         : "7-12 LPA",
+            "category"       : "Healthcare",
+            "work_type"      : "Hybrid",
+            "experience"     : "3-5 years",
+            "education"      : "B.Tech in IT / Computer Science",
+            "skills"         : ["EHR Systems", "HL7", "FHIR", "Database Management", "Python", "Healthcare Compliance"],
+            "responsibilities": [
+                "Implement and maintain electronic health record systems",
+                "Ensure interoperability between healthcare systems",
+                "Train hospital staff on IT systems",
+                "Maintain data security and patient privacy",
+                "Troubleshoot technical issues in clinical systems"
+            ]
+        },
+        {
+            "title"          : "Pharmacovigilance Analyst",
+            "company"        : "PharmaSafe India",
+            "location"       : "Mumbai, India",
+            "salary"         : "5-9 LPA",
+            "category"       : "Healthcare",
+            "work_type"      : "Hybrid",
+            "experience"     : "2-4 years",
+            "education"      : "B.Pharm / M.Pharm / MBBS",
+            "skills"         : ["Adverse Event Reporting", "MedDRA", "Oracle Argus", "Regulatory Writing", "ICH Guidelines"],
+            "responsibilities": [
+                "Monitor and report adverse drug reactions",
+                "Prepare safety reports for regulatory submissions",
+                "Review medical literature for safety signals",
+                "Ensure compliance with ICH and WHO guidelines",
+                "Coordinate with global pharmacovigilance teams"
+            ]
         },
     ]
 

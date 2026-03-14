@@ -256,3 +256,17 @@ body {
 .report-item:hover {
     transform: translateY(-3px);
 }
+
+/* ===== MODAL STYLING ===== */
+
+/* Job detail box inside modal */
+.detail-box {
+    background-color: #f8f9fa;
+    border: 1px solid #e8ecf4;
+}
+
+/* Modal rounded corners */
+.modal-content {
+    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}

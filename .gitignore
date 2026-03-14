@@ -1,0 +1,29 @@
+git --version
+```
+It should show something like `git version 2.43.0`
+
+---
+
+## Step 4 — Create `.gitignore` file
+Before pushing, create a `.gitignore` file in your project folder to avoid pushing unnecessary files:
+
+Create file `.gitignore` and paste this inside:
+```
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Model files (large files)
+model/model.pkl
+model/tfidf.pkl
+
+# Dataset (large file)
+data/jobs.csv
+
+# VS Code settings
+.vscode/
+
+# Environment
+venv/
+.env
