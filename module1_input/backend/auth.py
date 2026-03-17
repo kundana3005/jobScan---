@@ -18,20 +18,30 @@ USERS_FILE = "users.json"
 
 
 # ─── HELPER FUNCTIONS ───────────────────────────────────────────
+# ─── HELPER FUNCTIONS ───────────────────────────────────────────
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+USERS_FILE = os.path.join(BASE_DIR, "..", "..", "users.json")
+
 
 def load_users():
     if not os.path.exists(USERS_FILE):
         return {}
-    with open(USERS_FILE, 'r') as f:
-        return json.load(f)
+
+    try:
+        with open(USERS_FILE, 'r') as f:
+            return json.load(f)
+    except:
+        return {}
+
 
 def save_users(users):
     with open(USERS_FILE, 'w') as f:
         json.dump(users, f, indent=4)
 
+
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
-
 
 # ─── ROUTES ─────────────────────────────────────────────────────
 
